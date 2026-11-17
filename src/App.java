@@ -1,9 +1,13 @@
 import singleton.DatabaseManager;
 import singleton.Entity;
+import factory.*;
+
+import java.lang.reflect.Type;
 
 public class App {
     public static void main(String[] args) {
-        testSingleton();
+
+        testFactory("mobile");
     }
 
     private static void testSingleton(){
@@ -15,5 +19,16 @@ public class App {
         }
     }
 
+    public static void testFactory(String type) {
+        Dialog dialog;
 
+        if (type.equals("windows")) {
+            dialog = new WindowsDialog();
+        } if(type.equals("mobile")) {
+            dialog = new MobileDialog();
+        }else {
+            dialog = new WebDialog();
+        }
+        dialog.render();
+    }
 }
